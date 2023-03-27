@@ -16,6 +16,4 @@ const FooterWrapper = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px;
-  background-color: rgb(40, 40, 40);
 `;
