@@ -4,19 +4,19 @@ import Main from './components/Main';
 import Footer from './components/Footer';
 function App() {
   return (
-    <AppWrapper>
+    <SectionWrapper>
       <Header />
       <Main />
       <Footer />
-    </AppWrapper>
+    </SectionWrapper>
   );
 }
 
-const AppWrapper = styled.div`
+const SectionWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 100vh;
+  height: 100vh;
 `;
 
 export default App;
