@@ -16,8 +16,9 @@ const Header = () => {
 const HeaderWrapper = styled.section`
   display: flex;
   justify-content: center;
-  gap: 25px;
-  padding: 20px;
+  align-items: center;
+  gap: 20px;
+  padding: 10px;
   background-color: rgb(40, 40, 40);
 `;
 

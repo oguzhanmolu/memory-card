@@ -1,98 +1,66 @@
 import styled from 'styled-components';
-import char1 from '../assets/characters/char3.png';
-import char2 from '../assets/characters/char5.png';
+import GameDescription from './GameDescription';
+import Scoreboard from './Scoreboard';
+import CardsGrid from './Cards/CardsGrid';
+import { useState, useEffect } from 'react';
+import { shuffleArr, handleAnimation } from '../utils';
 
 const Main = () => {
-  const test = (e) => {
-    console.log(e.target);
-    e.target.classList.add('flip-animation');
-    e.target.style.backgroundImage = `url(${char2})`;
+  const [cards, setCards] = useState([]);
+
+  useEffect(() => {
+    const loadCards = async () => await getCardObjects();
+    loadCards();
+  }, []);
+
+  const createCardObjects = () => {
+    const tempArray = [];
+    const characters = [
+      'banjo-kazooie',
+      'bowser',
+      'captain-falcon',
+      'daisy',
+      'diddy-kong',
+      'duck-hunt',
+      'hero',
+      'ike',
+      'incineroar',
+      'isabelle',
+      'juggly-puff',
+      'link',
+      'luigi',
+      'mario',
+      'peach',
+      'pikachu',
+      'piranha-plant',
+      'wario',
+    ];
+
+    characters.forEach((character) => {
+      const characterName = character;
+      const isClicked = false;
+      tempArray.push({ characterName, isClicked });
+    });
+
+    setCards(...cards, tempArray);
   };
+
+  const getCardObjects = () => {
+    const cards = createCardObjects();
+    return cards;
+  };
+
+  const handleCardClick = (e) => {
+    const cards = document.querySelectorAll('.card-element');
+
+    handleAnimation(cards);
+  };
+
   return (
     <MainWrapper>
-      <MainText>
-        Get points for choosing a card, but don't click on the same card more
-        than once!
-      </MainText>
-      <div>
-        <ScoreElement>CURRENT SCORE</ScoreElement>
-        <ScoreElement>HIGHEST SCORE</ScoreElement>
-      </div>
-
-      <CardWrapper>
-        <Card
-          onClick={test}
-          style={{ backgroundImage: `url(${char1})` }}
-        ></Card>
-        <Card
-          onClick={test}
-          style={{ backgroundImage: `url(${char1})` }}
-        ></Card>{' '}
-        <Card
-          onClick={test}
-          style={{ backgroundImage: `url(${char1})` }}
-        ></Card>{' '}
-        <Card
-          onClick={test}
-          style={{ backgroundImage: `url(${char1})` }}
-        ></Card>{' '}
-        <Card
-          onClick={test}
-          style={{ backgroundImage: `url(${char1})` }}
-        ></Card>{' '}
-        <Card
-          onClick={test}
-          style={{ backgroundImage: `url(${char1})` }}
-        ></Card>{' '}
-        <Card
-          onClick={test}
-          style={{ backgroundImage: `url(${char1})` }}
-        ></Card>{' '}
-        <Card
-          onClick={test}
-          style={{ backgroundImage: `url(${char1})` }}
-        ></Card>{' '}
-        <Card
-          onClick={test}
-          style={{ backgroundImage: `url(${char1})` }}
-        ></Card>{' '}
-        <Card
-          onClick={test}
-          style={{ backgroundImage: `url(${char1})` }}
-        ></Card>{' '}
-        <Card
-          onClick={test}
-          style={{ backgroundImage: `url(${char1})` }}
-        ></Card>{' '}
-        <Card
-          onClick={test}
-          style={{ backgroundImage: `url(${char1})` }}
-        ></Card>{' '}
-        <Card
-          onClick={test}
-          style={{ backgroundImage: `url(${char1})` }}
-        ></Card>{' '}
-        <Card
-          onClick={test}
-          style={{ backgroundImage: `url(${char1})` }}
-        ></Card>{' '}
-        <Card
-          onClick={test}
-          style={{ backgroundImage: `url(${char1})` }}
-        ></Card>{' '}
-        <Card
-          onClick={test}
-          style={{ backgroundImage: `url(${char1})` }}
-        ></Card>
-        <Card
-          onClick={test}
-          style={{ backgroundImage: `url(${char1})` }}
-        ></Card>
-        <Card
-          onClick={test}
-          style={{ backgroundImage: `url(${char1})` }}
-        ></Card>
-      </CardWrapper>
+      <GameDescription />
+      <Scoreboard />
+      <CardsGrid cards={cards} handleCardClick={handleCardClick} />
     </MainWrapper>
   );
 };
@@ -104,38 +72,4 @@ const MainWrapper = styled.section`
   flex-direction: column;
   align-items: center;
   gap: 50px;
-`;
-
-const MainText = styled.p`
-  font-size: 2.25rem;
-`;
-
-const CardWrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 50px;
-`;
-
-const Card = styled.div`
-  height: 200px;
-  width: 200px;
-  background-color: rgb(40, 40, 40);
-  cursor: pointer;
-`;
-
-const Img = styled.img`
-  background-color: rgb(40, 40, 40);
-  border-radius: 5px;
-  height: 200px;
-  width: 200px;
-  padding: 25px;
-`;
-
-const ScoreElement = styled.span`
-  height: 75px;
-  padding: 15px;
-  margin: 25px 0 50px 10px;
-  background-color: rgb(40, 40, 40);
-  color: white;
-  font-size: 1.5rem;
 `;
