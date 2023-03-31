@@ -5,7 +5,7 @@ const Card = ({ character, handleCardClick }) => {
     <CardElement className='card-element' onClick={handleCardClick}>
       <Image
         src={require(`../../assets/characters/${character}.png`)}
-        alt='Super Smash character image'
+        alt={`Image of ${character}`}
       />
       <h2>{character}</h2>
     </CardElement>
@@ -30,6 +30,7 @@ const Image = styled.img`
   width: 150px;
   background-color: rgb(40, 40, 40);
   color: white;
+  pointer-events: none;
 `;
 
 export default Card;

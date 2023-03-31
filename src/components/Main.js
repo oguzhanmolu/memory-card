@@ -9,7 +9,7 @@ const Main = () => {
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
-    const loadCards = async () => await getCardObjects();
+    const loadCards = async () => await createCardObjects();
     loadCards();
   }, []);
 
@@ -45,15 +45,19 @@ const Main = () => {
     setCards(...cards, tempArray);
   };
 
-  const getCardObjects = () => {
-    const cards = createCardObjects();
-    return cards;
-  };
-
   const handleCardClick = (e) => {
-    const cards = document.querySelectorAll('.card-element');
+    const clickedCard = e.target.lastChild.textContent;
+    cards.map((card) => {
+      if (card.characterName === clickedCard && card.isClicked === true)
+        return alert('game ova');
 
-    handleAnimation(cards);
+      if (card.characterName === clickedCard && card.isClicked === false)
+        card.isClicked = true;
+    });
+
+    const cardElements = document.querySelectorAll('.card-element');
+    handleAnimation(cardElements);
+    console.log(cards);
   };
 
   return (

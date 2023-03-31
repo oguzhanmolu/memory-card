@@ -1,6 +1,6 @@
-export const shuffleArr = (arr) => [...arr].sort(() => Math.random() - 0.5);
+const shuffleArr = (arr) => [...arr].sort(() => Math.random() - 0.5);
 
-export const handleAnimation = (cards) => {
+const handleAnimation = (cards) => {
   cards.forEach((card) => {
     card.classList.add('flip-animation');
     card.childNodes.forEach((child) => (child.style.display = 'none'));
@@ -11,3 +11,5 @@ export const handleAnimation = (cards) => {
     });
   });
 };
+
+export { shuffleArr, handleAnimation };

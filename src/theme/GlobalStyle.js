@@ -1,5 +1,5 @@
 import { createGlobalStyle, GlobalStyleComponent } from 'styled-components';
-import backfaceImg from '../assets/card-backface.png';
+import cardBackface from '../assets/card-backface.png';
 
 const GlobalStyle = createGlobalStyle`
 *{
@@ -19,27 +19,24 @@ const GlobalStyle = createGlobalStyle`
 }
 
 .flip-animation{
-    animation: flip-appear .75s;
+    animation: flip-appear .5s;
 }
 
 @keyframes flip-appear {
   0% {
     transform: rotateY(0deg);
 
-    opacity: 0;
   }
   50%{
     transform: rotateY(180deg);
-    background-image: url(${backfaceImg});
-    background-repeat:no-repeat;
-    background-position:center;
+    background-image:url(${cardBackface});
+    background-repeat: no-repeat;
+    background-position: center;
     background-size: 150px;
-    
     
   }
   100% {
     transform: rotateY(0deg);
-    opacity: 1;
   }
 }
 
