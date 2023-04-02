@@ -16,6 +16,7 @@ const SectionWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 25px;
   height: 100vh;
 `;
 

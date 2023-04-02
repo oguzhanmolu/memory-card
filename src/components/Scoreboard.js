@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-const ScoreElement = () => {
+const Scoreboard = ({ currentScore, highestScore }) => {
   return (
     <div>
-      <TextElement>CURRENT SCORE</TextElement>
-      <TextElement>HIGHEST SCORE</TextElement>
+      <TextElement>Current Score: {currentScore}</TextElement>
+      <TextElement>Highest Score: {highestScore}</TextElement>
     </div>
   );
 };
@@ -18,4 +18,4 @@ const TextElement = styled.span`
   font-size: 1.5rem;
 `;
 
-export default ScoreElement;
+export default Scoreboard;

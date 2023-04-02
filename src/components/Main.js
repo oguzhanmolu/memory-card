@@ -1,18 +1,22 @@
+import { useState, useEffect } from 'react';
+import { shuffleArr } from '../utils';
 import styled from 'styled-components';
 import GameDescription from './GameDescription';
 import Scoreboard from './Scoreboard';
 import CardsGrid from './Cards/CardsGrid';
-import { useState, useEffect } from 'react';
-import { shuffleArr, handleAnimation } from '../utils';
 
 const Main = () => {
+  // Hooks
   const [cards, setCards] = useState([]);
+  const [currentScore, setCurrentScore] = useState(0);
+  const [highestScore, setHighestScore] = useState(0);
 
+  // Initial card load
   useEffect(() => {
-    const loadCards = async () => await createCardObjects();
-    loadCards();
+    createCardObjects();
   }, []);
 
+  // Create new character objects
   const createCardObjects = () => {
     const tempArray = [];
     const characters = [
@@ -42,34 +46,59 @@ const Main = () => {
       tempArray.push({ characterName, isClicked });
     });
 
-    setCards(...cards, tempArray);
+    setCards(tempArray);
+    return cards;
   };
 
+  // Handle card clicks
   const handleCardClick = (e) => {
+    // Get clicked card text, then handle play round
     const clickedCard = e.target.lastChild.textContent;
-    cards.map((card) => {
-      if (card.characterName === clickedCard && card.isClicked === true)
-        return alert('game ova');
+    playRound(clickedCard);
 
-      if (card.characterName === clickedCard && card.isClicked === false)
+    // Shuffle cards on click
+    setCards(shuffleArr(createCardObjects()));
+  };
+
+  // Play round
+  const playRound = (clickedCard) => {
+    cards.find((card) => {
+      // If score-> Set card.isClicked=true/Update scoreboard
+      if (card.characterName === clickedCard && card.isClicked === false) {
         card.isClicked = true;
-    });
+        updateScoreboard();
+      }
 
-    const cardElements = document.querySelectorAll('.card-element');
-    handleAnimation(cardElements);
-    console.log(cards);
+      // If game over-> Reset the game
+      else if (card.characterName === clickedCard && card.isClicked === true) {
+        resetGame();
+      }
+    });
+  };
+
+  // Update Scoreboard
+  const updateScoreboard = () => {
+    const newScore = currentScore + 1;
+    setCurrentScore(newScore);
+    if (newScore > highestScore) setHighestScore(newScore);
+  };
+
+  // Reset the game
+  const resetGame = () => {
+    setCurrentScore(0);
+    const newArray = [...cards];
+    newArray.map((card) => (card.isClicked = false));
+    setCards(newArray);
   };
 
   return (
     <MainWrapper>
       <GameDescription />
-      <Scoreboard />
+      <Scoreboard currentScore={currentScore} highestScore={highestScore} />
       <CardsGrid cards={cards} handleCardClick={handleCardClick} />
     </MainWrapper>
   );
 };
-
-export default Main;
 
 const MainWrapper = styled.section`
   display: flex;
@@ -77,3 +106,5 @@ const MainWrapper = styled.section`
   align-items: center;
   gap: 50px;
 `;
+
+export default Main;

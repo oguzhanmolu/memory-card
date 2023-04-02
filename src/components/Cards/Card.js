@@ -1,8 +1,8 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 const Card = ({ character, handleCardClick }) => {
   return (
-    <CardElement className='card-element' onClick={handleCardClick}>
+    <CardElement onClick={handleCardClick}>
       <Image
         src={require(`../../assets/characters/${character}.png`)}
         alt={`Image of ${character}`}
@@ -11,6 +11,20 @@ const Card = ({ character, handleCardClick }) => {
     </CardElement>
   );
 };
+
+const flipAnimation = keyframes`
+  0% {
+    transform: rotateY(0deg);
+    opacity: 0;
+  }
+  50% {
+    transform: rotateY(90deg);
+  }
+  100% {
+    transform: rotateY(0deg);
+    opacity: 1;
+  }
+`;
 
 const CardElement = styled.div`
   display: flex;
@@ -22,14 +36,13 @@ const CardElement = styled.div`
   width: 200px;
   background-color: rgb(40, 40, 40);
   color: white;
+  animation: ${flipAnimation} 0.25s;
   cursor: pointer;
 `;
 
 const Image = styled.img`
   height: 150px;
   width: 150px;
-  background-color: rgb(40, 40, 40);
-  color: white;
   pointer-events: none;
 `;
 
