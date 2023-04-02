@@ -1,0 +1,12 @@
+{
+  "files": {
+    "main.js": "/memory-card/static/js/main.6c5e9007.js",
+    "static/media/banjo-kazooie.png": "/memory-card/static/media/banjo-kazooie.e8795932b35da359186b.png",
+    "static/media/hero.png": "/memory-card/static/media/hero.190facab5711e986a49f.png",
+    "index.html": "/memory-card/index.html",
+    "main.6c5e9007.js.map": "/memory-card/static/js/main.6c5e9007.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.6c5e9007.js"
+  ]
+}
