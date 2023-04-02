@@ -1,2 +1,2 @@
 Memory card game built with React.js
-Live demo:
+Live demo:https://oguzhanmolu.github.io/memory-card/
